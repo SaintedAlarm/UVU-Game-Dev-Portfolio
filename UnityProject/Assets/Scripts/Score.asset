@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6df0c6962af14c60b2d5c35ebd9c64c, type: 3}
   m_Name: Score
   m_EditorClassIdentifier: 
-  value: 0
+  value: 10
   minValue: 0
   maxValue: 9999
   valueOutOfRange:
@@ -21,7 +21,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 3e85e37bfa010ff4e9ad302c0fad8b05, type: 2}
+      - m_Target: {fileID: 11400000, guid: 0486a8a4ba67efc4b878898fba9aec50, type: 2}
         m_TargetAssemblyTypeName: GameAction, Assembly-CSharp
         m_MethodName: RaiseAction
         m_Mode: 1
@@ -32,4 +32,4 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
