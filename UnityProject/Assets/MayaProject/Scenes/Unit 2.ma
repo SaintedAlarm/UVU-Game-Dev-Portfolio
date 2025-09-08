@@ -1,6 +1,10 @@
 //Maya ASCII 2025ff03 scene
 //Name: Unit 2.ma
+<<<<<<< HEAD
 //Last modified: Mon, Sep 08, 2025 04:47:31 PM
+=======
+//Last modified: Mon, Sep 08, 2025 04:53:58 PM
+>>>>>>> 5d95f7c (Made the combined scene)
 //Codeset: 1252
 requires maya "2025ff03";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" -nodeType "aiImagerDenoiserOidn"
@@ -11,6 +15,7 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26100)";
+<<<<<<< HEAD
 fileInfo "UUID" "C13DB26E-4CD7-7F1D-E2C9-C4A865820262";
 createNode transform -s -n "persp";
 	rename -uid "ED079B81-4A6D-E614-3D7F-6F92A6A56A23";
@@ -19,15 +24,32 @@ createNode transform -s -n "persp";
 	setAttr ".r" -type "double3" 338.66164727001035 529.79999999953054 -359.99999999998909 ;
 	setAttr ".rp" -type "double3" 3.4694469520141987e-17 0 8.8817841970012523e-16 ;
 	setAttr ".rpt" -type "double3" -1.1263850378384866e-16 3.2318575001087253e-16 -1.7125207696669959e-15 ;
+=======
+fileInfo "UUID" "A20FCF30-42E5-06FE-3BBB-AE9C3E6CBD9B";
+createNode transform -s -n "persp";
+	rename -uid "ED079B81-4A6D-E614-3D7F-6F92A6A56A23";
+	setAttr ".v" no;
+	setAttr ".t" -type "double3" 21.379307225465997 11.789484472208391 -19.963407766643726 ;
+	setAttr ".r" -type "double3" -17.399999999999988 133.19999999999959 0 ;
+	setAttr ".rpt" -type "double3" -7.4277932508982122e-16 -2.8709172170589019e-17 -1.348600443348301e-16 ;
+>>>>>>> 5d95f7c (Made the combined scene)
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "67C8A332-420F-7BC4-9638-34AD30C82346";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999979;
+<<<<<<< HEAD
 	setAttr ".coi" 34.129511973578367;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
 	setAttr ".tp" -type "double3" -4.03212632645364 0.78505492210388184 0.25590304867061636 ;
+=======
+	setAttr ".coi" 31.240728581969421;
+	setAttr ".imn" -type "string" "persp";
+	setAttr ".den" -type "string" "persp_depth";
+	setAttr ".man" -type "string" "persp_mask";
+	setAttr ".tp" -type "double3" -0.35209542512893677 2.4472322463989258 0.44373766135170101 ;
+>>>>>>> 5d95f7c (Made the combined scene)
 	setAttr ".hc" -type "string" "viewSet -p %camera";
 createNode transform -s -n "top";
 	rename -uid "461D6551-4C9F-BE64-FEAD-FBB818E6E37F";
@@ -103,7 +125,11 @@ createNode mesh -n "ArchwayShape" -p "Archway";
 	setAttr ".gtag[5].gtagcmp" -type "componentList" 2 "f[19:24]" "f[90:91]";
 	setAttr ".pv" -type "double2" 0.5 0.5 ;
 	setAttr ".uvst[0].uvsn" -type "string" "map1";
+<<<<<<< HEAD
 	setAttr -s 189 ".uvst[0].uvsp[0:188]" -type "float2" 0.375 0 0.41666666
+=======
+	setAttr -s 223 ".uvst[0].uvsp[0:222]" -type "float2" 0.375 0 0.41666666
+>>>>>>> 5d95f7c (Made the combined scene)
 		 0 0.58333331 0 0.625 0 0.375 0.03125 0.41666666 0.03125 0.58333331 0.03125 0.625
 		 0.03125 0.375 0.0625 0.41666666 0.0625 0.58333331 0.0625 0.625 0.0625 0.375 0.09375
 		 0.41666666 0.09375 0.58333331 0.09375 0.625 0.09375 0.375 0.125 0.41666666 0.125
@@ -140,7 +166,18 @@ createNode mesh -n "ArchwayShape" -p "Archway";
 		 0.45833331 0.21827392 0.45833331 0.21875 0.45833331 0.13299525 0.41666666 0.13299529
 		 0.54166663 0.18749863 0.54166663 0.18797608 0.58192849 0.18797612 0.58192849 0.1875
 		 0.54166663 0.1875 0.45833331 0.1875 0.41666666 0.1875 0.58333331 0.16024627 0.54166663
+<<<<<<< HEAD
 		 0.16024627 0.45865843 0.53125 0.45833331 0.53125;
+=======
+		 0.16024627 0.45865843 0.53125 0.45833331 0.53125 0.45833331 0.21875 0.49999997 0.21875
+		 0.41666666 0 0.58333331 0.03125 0.58333331 0 0.41666666 0.03125 0.41666666 0.0625
+		 0.58333331 0.125 0.58333331 0.09375 0.41666666 0.125 0.58333331 0.15625 0.58333331
+		 0.125 0.41666666 0.15625 0.58333331 0.15625 0.58333331 0.03125 0.58333331 0.0625
+		 0.58333331 0.0625 0.58333331 0.09375 0.41666666 0.09375 0.41666666 0.125 0.41666666
+		 0 0.41666666 0 0.41666666 0.03125 0.41666666 0.03125 0.41666666 0.0625 0.41666666
+		 0.0625 0.41666666 0.125 0.41666666 0.125 0.41666666 0.15625 0.41666666 0.15625 0.45833331
+		 0.19149628 0.49999997 0.16424257 0.45833331 0.53125 0.41666666 0.5625;
+>>>>>>> 5d95f7c (Made the combined scene)
 	setAttr ".cuvs" -type "string" "map1";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
@@ -344,14 +381,21 @@ createNode mesh -n "ArchwayShape" -p "Archway";
 		f 4 140 78 213 210
 		mu 0 4 93 28 150 146
 		f 4 -17 143 145 -145
+<<<<<<< HEAD
 		mu 0 4 30 95 94 29
 		f 4 -18 144 147 -147
 		mu 0 4 171 97 96 30
+=======
+		mu 0 4 30 95 94 189
+		f 4 -18 144 147 -147
+		mu 0 4 171 97 96 190
+>>>>>>> 5d95f7c (Made the combined scene)
 		f 4 -228 233 229 -144
 		mu 0 4 172 173 174 175
 		f 4 234 230 146 -233
 		mu 0 4 179 180 181 182
 		f 4 -52 148 150 -150
+<<<<<<< HEAD
 		mu 0 4 5 99 1 98
 		f 4 52 152 -154 -152
 		mu 0 4 6 101 2 100
@@ -397,6 +441,53 @@ createNode mesh -n "ArchwayShape" -p "Archway";
 		mu 0 4 95 140 94 141
 		f 4 144 204 -206 -204
 		mu 0 4 97 142 96 143
+=======
+		mu 0 4 5 99 191 98
+		f 4 52 152 -154 -152
+		mu 0 4 192 101 193 100
+		f 4 -56 149 155 -155
+		mu 0 4 9 103 194 102
+		f 4 -60 154 157 -157
+		mu 0 4 13 105 195 104
+		f 4 64 159 -161 -159
+		mu 0 4 196 107 197 106
+		f 4 -68 161 163 -163
+		mu 0 4 21 109 198 108
+		f 4 68 164 -166 -160
+		mu 0 4 199 111 200 110
+		f 4 -72 162 167 -167
+		mu 0 4 168 113 201 112
+		f 4 72 168 -170 -165
+		mu 0 4 26 115 202 114
+		f 4 56 171 -173 -171
+		mu 0 4 117 116 203 204
+		f 4 60 173 -175 -172
+		mu 0 4 119 118 205 206
+		f 4 -64 175 177 -177
+		mu 0 4 121 120 207 208
+		f 4 -151 178 180 -180
+		mu 0 4 209 210 122 123
+		f 4 153 182 -184 -182
+		mu 0 4 100 193 124 125
+		f 4 -156 179 185 -185
+		mu 0 4 211 212 126 127
+		f 4 -158 184 187 -187
+		mu 0 4 213 214 128 129
+		f 4 160 189 -191 -189
+		mu 0 4 106 197 130 131
+		f 4 -164 191 193 -193
+		mu 0 4 215 216 132 133
+		f 4 165 194 -196 -190
+		mu 0 4 110 200 134 135
+		f 4 -168 192 197 -197
+		mu 0 4 217 218 136 137
+		f 4 169 198 -200 -195
+		mu 0 4 114 202 138 139
+		f 4 143 201 -203 -201
+		mu 0 4 95 140 219 141
+		f 4 144 204 -206 -204
+		mu 0 4 97 142 220 143
+>>>>>>> 5d95f7c (Made the combined scene)
 		f 4 146 207 -209 -207
 		mu 0 4 181 144 25 145
 		f 4 217 218 219 -214
@@ -422,7 +513,11 @@ createNode mesh -n "ArchwayShape" -p "Archway";
 		f 4 231 -235 236 -143
 		mu 0 4 115 185 186 178
 		f 5 -239 -238 -242 -241 239
+<<<<<<< HEAD
 		mu 0 5 41 47 48 188 187
+=======
+		mu 0 5 221 222 48 188 187
+>>>>>>> 5d95f7c (Made the combined scene)
 		f 4 34 242 -237 -244
 		mu 0 4 43 44 178 186
 		f 4 31 244 -236 -246
@@ -2006,6 +2101,7 @@ createNode mesh -n "Fence1:FenceShape" -p "Fence1:Fence";
 	setAttr ".pd[0]" -type "dataPolyComponent" Index_Data UV 0 ;
 	setAttr ".hfd" -type "dataPolyComponent" Index_Data Face 0 ;
 createNode lightLinker -s -n "lightLinker1";
+<<<<<<< HEAD
 	rename -uid "1C626341-4AAD-342A-4D24-34AECAA4987D";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
@@ -2015,11 +2111,26 @@ createNode poseInterpolatorManager -n "poseInterpolatorManager";
 	rename -uid "4A9D1F3A-4A26-AA7C-06CE-3786213484AA";
 createNode displayLayerManager -n "layerManager";
 	rename -uid "64BBAD10-449C-1B84-5A3D-00B9F134FF62";
+=======
+	rename -uid "7EFE5633-4D46-19FF-8585-BBB8EB327300";
+	setAttr -s 2 ".lnk";
+	setAttr -s 2 ".slnk";
+createNode shapeEditorManager -n "shapeEditorManager";
+	rename -uid "4AE1D6C6-4CCE-119A-F8C3-FB906EA58442";
+createNode poseInterpolatorManager -n "poseInterpolatorManager";
+	rename -uid "741775BC-4EB9-A36F-3E09-E38F0DE5CBC7";
+createNode displayLayerManager -n "layerManager";
+	rename -uid "BA9F3D02-494A-CEC7-0348-4080E7FFEDEA";
+>>>>>>> 5d95f7c (Made the combined scene)
 createNode displayLayer -n "defaultLayer";
 	rename -uid "43E4E4E9-4310-D57A-09C5-08AB72BF489C";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
+<<<<<<< HEAD
 	rename -uid "1A2FE6DA-48AF-E7AC-2FEF-86BD361A0D12";
+=======
+	rename -uid "EF99A4DB-4724-C542-83B3-B1BB6859560D";
+>>>>>>> 5d95f7c (Made the combined scene)
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "0D646706-4024-13F8-1248-888F182C734D";
 	setAttr ".g" yes;
