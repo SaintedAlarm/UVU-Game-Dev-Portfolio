@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
-//Name: Barrel or tankered WIP.ma
-//Last modified: Wed, Sep 24, 2025 07:43:50 PM
+//Name: Tankered.ma
+//Last modified: Wed, Sep 24, 2025 07:44:49 PM
 //Codeset: 1252
 requires maya "2025ff03";
 requires "stereoCamera" "10.0";
@@ -13,7 +13,7 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26100)";
-fileInfo "UUID" "510CCB9E-4A6F-CD98-C11C-B28E330EA09B";
+fileInfo "UUID" "325F237A-4040-4882-E427-C5B9F63E44B1";
 createNode transform -s -n "persp";
 	rename -uid "2AF0CBDC-4E1E-01CA-2A41-659AD3286B52";
 	setAttr ".v" no;
@@ -637,4 +637,4 @@ connectAttr "HandleShape.wm" "polyMergeVert2.mp";
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 connectAttr "MugShape.iog" ":initialShadingGroup.dsm" -na;
 connectAttr "HandleShape.iog" ":initialShadingGroup.dsm" -na;
-// End of Barrel or tankered WIP.ma
+// End of Tankered.ma
