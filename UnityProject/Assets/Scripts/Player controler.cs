@@ -7,13 +7,13 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Get input (WASD or arrow keys)
-        float moveX = Input.GetAxis("Horizontal"); // A/D or Left/Right
-        float moveZ = Input.GetAxis("Vertical");   // W/S or Up/Down
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
 
-        // Create movement vector
+        // Movement vector
         Vector3 move = new Vector3(moveX, 0f, moveZ);
 
-        // Apply movement relative to world space
-        transform.Translate(move * speed * Time.deltaTime, Space.World);
+        // Move relative to the character’s own facing (local space)
+        transform.Translate(move * speed * Time.deltaTime, Space.Self);
     }
 }
