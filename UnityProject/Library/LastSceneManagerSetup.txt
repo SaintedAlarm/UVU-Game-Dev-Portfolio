@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/ArenaTest.unity
+- path: Assets/Scenes/EnemyChase.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
