@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ca2343be0c98144bfc751b49a76d81, type: 3}
   m_Name: Instancer_Skeleton
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 526461841939499146, guid: 4c3e699d3e176994083f7cdf475556c2, type: 3}
   OnSpawned:
     m_PersistentCalls:
       m_Calls: []
