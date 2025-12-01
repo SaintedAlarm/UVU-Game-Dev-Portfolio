@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: Minion.ma
-//Last modified: Sun, Nov 30, 2025 08:19:12 PM
+//Last modified: Sun, Nov 30, 2025 08:24:59 PM
 //Codeset: 1252
 requires maya "2025ff03";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" -nodeType "aiImagerDenoiserOidn"
@@ -11,7 +11,7 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202407121012-8ed02f4c99";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26100)";
-fileInfo "UUID" "ED8440C2-44E4-960F-FEB8-79884DC660E8";
+fileInfo "UUID" "27D3857F-47D4-9604-7F24-E5B4352AFE9C";
 createNode transform -s -n "persp";
 	rename -uid "5C3B12D3-5148-C4D8-5735-13A16F7D5661";
 	setAttr ".v" no;
@@ -3702,7 +3702,7 @@ createNode mesh -n "polySurfaceShape3" -p "BodyMesh";
 	setAttr ".dcc" -type "string" "Ambient+Diffuse";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
-	setAttr -s 1713 ".pt";
+	setAttr -s 1417 ".pt";
 	setAttr ".pt[0]" -type "float3" -0.0081071258 0.013807952 0.0020263195 ;
 	setAttr ".pt[1]" -type "float3" -0.0081598759 0.014501274 0.0039659292 ;
 	setAttr ".pt[2]" -type "float3" -0.010221034 0.012438834 0.0010218471 ;
@@ -9197,15 +9197,15 @@ createNode mesh -n "polySurfaceShape5" -p "LeftEyeMesh";
 	setAttr ".pd[0]" -type "dataPolyComponent" Index_Data UV 0 ;
 	setAttr ".hfd" -type "dataPolyComponent" Index_Data Face 0 ;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "618F47E3-4E9C-592E-A9A3-94A1187FF6F2";
+	rename -uid "85DFD823-4D19-D187-EF67-E486754479F9";
 	setAttr -s 4 ".lnk";
 	setAttr -s 4 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "65292631-479E-B280-7334-B3AE5A32C0B4";
+	rename -uid "159ACC6D-4985-31B5-6882-CF8F07652868";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "90B2A947-4758-6A86-11A3-1F81AB08455B";
+	rename -uid "FF30F047-41D9-9F73-218E-B5A09F75C7D8";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "BA99E420-4C61-C7A0-C43B-D7A09DD3E8D2";
+	rename -uid "9DACF682-481F-6CCD-F9E7-4A8DB0BF19EC";
 	setAttr ".cdl" 2;
 	setAttr -s 4 ".dli[1:3]"  1 2 3;
 	setAttr -s 4 ".dli";
@@ -9213,7 +9213,7 @@ createNode displayLayer -n "defaultLayer";
 	rename -uid "951E0483-824C-7C69-F941-4CB521FD275D";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "62DF9EC5-4FEE-9731-7355-AF923B023993";
+	rename -uid "5A287CD9-4EA6-A9F1-23F3-99A164B21918";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "6FD9DF58-7E49-2691-08E6-E3A8588F6FD1";
 	setAttr ".g" yes;
