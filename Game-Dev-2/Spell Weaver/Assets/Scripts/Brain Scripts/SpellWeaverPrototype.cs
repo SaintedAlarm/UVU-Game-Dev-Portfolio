@@ -10,16 +10,17 @@ public class SpellWeaverPrototype : MonoBehaviour
     [Header("UI")]
     public TMP_Text requestText;
     public TMP_Text feedbackText;
-    public TMP_Text scoreText;     // assign ScoreText
-    public TMP_Text timerText;     // assign TimerText
+    public TMP_Text scoreText;
+    public TMP_Text timerText;
     public Button castButton;
 
-    [Header("Timed Run Settings")]
-    public float roundTimeSeconds = 60f; // set to 60 for 1 minute (adjust anytime)
-    public bool restartAutomatically = false; // if true, auto restarts when time hits 0
+    [Header("Mode Settings")]
+    public bool useTimedMode = true;          // fallback if GameSettings not used
+    public float roundTimeSeconds = 60f;      // only used in timed mode
+    public bool restartAutomatically = false;
 
     private float timeRemaining;
-    private bool runActive = false;
+    private bool runActive;
 
     private ElementType selectedElement = ElementType.None;
     private EffectType selectedEffect = EffectType.None;
@@ -28,8 +29,8 @@ public class SpellWeaverPrototype : MonoBehaviour
     private EffectType requiredEffect;
 
     [Header("Score")]
-    public int score = 0;
-    public int streak = 0;
+    public int score;
+    public int streak;
 
     private void Start()
     {
@@ -40,14 +41,19 @@ public class SpellWeaverPrototype : MonoBehaviour
     {
         if (!runActive) return;
 
-        timeRemaining -= Time.deltaTime;
-        if (timeRemaining <= 0f)
+        if (useTimedMode)
         {
-            timeRemaining = 0f;
-            EndRun();
-        }
+            timeRemaining -= Time.deltaTime;
 
-        UpdateTimerUI();
+            if (timeRemaining <= 0f)
+            {
+                timeRemaining = 0f;
+                EndRun();
+                return;
+            }
+
+            UpdateTimerUI();
+        }
     }
 
     public void StartRun()
@@ -55,26 +61,31 @@ public class SpellWeaverPrototype : MonoBehaviour
         score = 0;
         streak = 0;
 
-        timeRemaining = roundTimeSeconds;
+        // If GameSettings exists, it overrides inspector
+        //if (typeof(GameSettings) != null)
+        {
+           //useTimedMode stays waterver the inspector says
+        }
+
+        timeRemaining = useTimedMode ? roundTimeSeconds : Mathf.Infinity;
         runActive = true;
 
         selectedElement = ElementType.None;
         selectedEffect = EffectType.None;
 
         GenerateNewRequest();
-        UpdateFeedback(forceOverwrite: true);
         UpdateScoreUI();
         UpdateTimerUI();
 
         feedbackText.text = "Go!";
-        castButton.interactable = false;
+        UpdateCastButton();
     }
 
     private void EndRun()
     {
-        runActive = false;
+        if (!useTimedMode) return;
 
-        // Disable casting once time is up
+        runActive = false;
         castButton.interactable = false;
 
         feedbackText.text = $"Time's up! Final Score: {score}";
@@ -90,7 +101,7 @@ public class SpellWeaverPrototype : MonoBehaviour
         if (!runActive) return;
 
         selectedElement = (ElementType)elementIndex;
-        UpdateFeedback(forceOverwrite: true);
+        UpdateFeedback();
     }
 
     public void SelectEffect(int effectIndex)
@@ -98,7 +109,7 @@ public class SpellWeaverPrototype : MonoBehaviour
         if (!runActive) return;
 
         selectedEffect = (EffectType)effectIndex;
-        UpdateFeedback(forceOverwrite: true);
+        UpdateFeedback();
     }
 
     public void Cast()
@@ -111,13 +122,12 @@ public class SpellWeaverPrototype : MonoBehaviour
             return;
         }
 
-        bool correct = (selectedElement == requiredElement && selectedEffect == requiredEffect);
+        bool correct = selectedElement == requiredElement &&
+                       selectedEffect == requiredEffect;
 
         if (correct)
         {
             streak++;
-
-            // Simple scoring. You can tune this later.
             int points = 10 + (streak * 2);
             score += points;
 
@@ -135,9 +145,7 @@ public class SpellWeaverPrototype : MonoBehaviour
         }
 
         UpdateScoreUI();
-
-        // Keep the message until player taps again
-        castButton.interactable = false;
+        UpdateCastButton();
     }
 
     private void GenerateNewRequest()
@@ -155,39 +163,45 @@ public class SpellWeaverPrototype : MonoBehaviour
         requiredElement = newElement;
         requiredEffect = newEffect;
 
-        requestText.text = $"Request: {requiredElement.ToString().ToUpper()} + {requiredEffect.ToString().ToUpper()}";
+        requestText.text =
+            $"Request: {requiredElement.ToString().ToUpper()} + {requiredEffect.ToString().ToUpper()}";
     }
 
-    private void UpdateFeedback(bool forceOverwrite)
+    private void UpdateFeedback()
     {
         string elementStr = selectedElement == ElementType.None ? "???" : selectedElement.ToString().ToUpper();
         string effectStr = selectedEffect == EffectType.None ? "???" : selectedEffect.ToString().ToUpper();
 
-        // Cast is only possible when both chosen AND run is active
-        castButton.interactable = runActive &&
-                                 (selectedElement != ElementType.None && selectedEffect != EffectType.None);
+        feedbackText.text = $"Selected: {elementStr} + {effectStr}";
+        UpdateCastButton();
+    }
 
-        if (forceOverwrite)
-        {
-            feedbackText.text = $"Selected: {elementStr} + {effectStr}";
-        }
+    private void UpdateCastButton()
+    {
+        castButton.interactable =
+            runActive &&
+            selectedElement != ElementType.None &&
+            selectedEffect != EffectType.None;
     }
 
     private void UpdateScoreUI()
     {
-        if (scoreText != null)
-            scoreText.text = $"Score: {score}  |  Streak: {streak}";
+        scoreText.text = $"Score: {score}  |  Streak: {streak}";
     }
 
     private void UpdateTimerUI()
     {
-        if (timerText == null) return;
+        if (!useTimedMode)
+        {
+            timerText.text = "Mode: Endless";
+            return;
+        }
 
         int seconds = Mathf.CeilToInt(timeRemaining);
         timerText.text = $"Time: {seconds}";
     }
 
-    // OPTIONAL: Hook this to a UI button if you add one
+    // Optional UI hook
     public void RestartButton()
     {
         StartRun();
