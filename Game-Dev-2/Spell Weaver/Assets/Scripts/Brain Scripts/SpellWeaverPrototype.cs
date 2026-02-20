@@ -15,9 +15,8 @@ public class SpellWeaverPrototype : MonoBehaviour
     public Button castButton;
 
     [Header("Mode Settings")]
-    public bool useTimedMode = true;          // fallback if GameSettings not used
-    public float roundTimeSeconds = 60f;      // only used in timed mode
-    public bool restartAutomatically = false;
+    public bool useTimedMode = true;
+    public float roundTimeSeconds = 60f;
 
     private float timeRemaining;
     private bool runActive;
@@ -28,8 +27,7 @@ public class SpellWeaverPrototype : MonoBehaviour
     private ElementType requiredElement;
     private EffectType requiredEffect;
 
-    [Header("Score")]
-    public int score;
+    [Header("Run Data")]
     public int streak;
 
     private void Start()
@@ -58,15 +56,7 @@ public class SpellWeaverPrototype : MonoBehaviour
 
     public void StartRun()
     {
-        score = 0;
         streak = 0;
-
-        // If GameSettings exists, it overrides inspector
-        //if (typeof(GameSettings) != null)
-        {
-           //useTimedMode stays waterver the inspector says
-        }
-
         timeRemaining = useTimedMode ? roundTimeSeconds : Mathf.Infinity;
         runActive = true;
 
@@ -86,14 +76,11 @@ public class SpellWeaverPrototype : MonoBehaviour
         if (!useTimedMode) return;
 
         runActive = false;
-        castButton.interactable = false;
 
-        feedbackText.text = $"Time's up! Final Score: {score}";
+        if (castButton != null)
+            castButton.interactable = false;
 
-        if (restartAutomatically)
-        {
-            StartRun();
-        }
+        feedbackText.text = $"Time's up! Total Coins: {Wallet.Instance.Coins}";
     }
 
     public void SelectElement(int elementIndex)
@@ -128,10 +115,11 @@ public class SpellWeaverPrototype : MonoBehaviour
         if (correct)
         {
             streak++;
-            int points = 10 + (streak * 2);
-            score += points;
 
-            feedbackText.text = $"Correct! +{points}";
+            int coinsEarned = 5 + (streak * 2);
+            Wallet.Instance.AddCoins(coinsEarned);
+
+            feedbackText.text = $"Correct! +{coinsEarned} Coins";
 
             selectedElement = ElementType.None;
             selectedEffect = EffectType.None;
@@ -178,15 +166,17 @@ public class SpellWeaverPrototype : MonoBehaviour
 
     private void UpdateCastButton()
     {
-        castButton.interactable =
-            runActive &&
-            selectedElement != ElementType.None &&
-            selectedEffect != EffectType.None;
+        if (castButton != null)
+        {
+            castButton.interactable =
+                runActive &&
+                selectedElement != ElementType.None;
+        }
     }
 
     private void UpdateScoreUI()
     {
-        scoreText.text = $"Score: {score}  |  Streak: {streak}";
+        scoreText.text = $"Coins: {Wallet.Instance.Coins}  |  Streak: {streak}";
     }
 
     private void UpdateTimerUI()
@@ -201,9 +191,11 @@ public class SpellWeaverPrototype : MonoBehaviour
         timerText.text = $"Time: {seconds}";
     }
 
-    // Optional UI hook
+    // Restart button can stay visible always
     public void RestartButton()
     {
+        if (runActive) return;
+
         StartRun();
     }
 }
