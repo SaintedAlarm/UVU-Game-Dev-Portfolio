@@ -6,17 +6,26 @@ public class SpellWeaverPrototype : MonoBehaviour
 {
     public enum ElementType { None, Fire, Water, Lightning }
     public enum EffectType { None, Touch, Ranged, Area }
-
+    public bool IsRunActive => runActive;
     [Header("UI")]
     public TMP_Text requestText;
     public TMP_Text feedbackText;
     public TMP_Text scoreText;
     public TMP_Text timerText;
     public Button castButton;
+    public Button restartButton;
 
     [Header("Mode Settings")]
     public bool useTimedMode = true;
     public float roundTimeSeconds = 60f;
+
+    [Header("Upgrade Tuning")]
+    public float extraTimePerLevel = 10f;   // +10 seconds per level
+    public int fireCoinBonusPerLevel = 2;   // +2 coins per level when casting Fire
+
+    // PlayerPrefs keys (must match shop keys)
+    private const string EXTRA_TIME_LEVEL_KEY = "Upg_ExtraTime_Level";
+    private const string FIRE_BONUS_LEVEL_KEY = "Upg_FireBonus_Level";
 
     private float timeRemaining;
     private bool runActive;
@@ -57,11 +66,24 @@ public class SpellWeaverPrototype : MonoBehaviour
     public void StartRun()
     {
         streak = 0;
+
+        // Base time
         timeRemaining = useTimedMode ? roundTimeSeconds : Mathf.Infinity;
+
+        // Apply upgrade: extra time (timed mode only)
+        if (useTimedMode)
+        {
+            int extraTimeLevel = PlayerPrefs.GetInt(EXTRA_TIME_LEVEL_KEY, 0);
+            timeRemaining += extraTimeLevel * extraTimePerLevel;
+        }
+
         runActive = true;
 
         selectedElement = ElementType.None;
         selectedEffect = EffectType.None;
+
+        if (restartButton != null)
+            restartButton.interactable = false;
 
         GenerateNewRequest();
         UpdateScoreUI();
@@ -80,7 +102,11 @@ public class SpellWeaverPrototype : MonoBehaviour
         if (castButton != null)
             castButton.interactable = false;
 
-        feedbackText.text = $"Time's up! Total Coins: {Wallet.Instance.Coins}";
+        if (restartButton != null)
+            restartButton.interactable = true;
+
+        if (feedbackText != null && Wallet.Instance != null)
+            feedbackText.text = $"Time's up! Total Coins: {Wallet.Instance.Coins}";
     }
 
     public void SelectElement(int elementIndex)
@@ -105,7 +131,8 @@ public class SpellWeaverPrototype : MonoBehaviour
 
         if (selectedElement == ElementType.None || selectedEffect == EffectType.None)
         {
-            feedbackText.text = "Pick BOTH an Element and an Effect!";
+            if (feedbackText != null)
+                feedbackText.text = "Pick BOTH an Element and an Effect!";
             return;
         }
 
@@ -116,11 +143,23 @@ public class SpellWeaverPrototype : MonoBehaviour
         {
             streak++;
 
+            // Base coins
             int coinsEarned = 5 + (streak * 2);
-            Wallet.Instance.AddCoins(coinsEarned);
 
-            feedbackText.text = $"Correct! +{coinsEarned} Coins";
+            // Upgrade: Fire coin bonus
+            if (selectedElement == ElementType.Fire)
+            {
+                int fireBonusLevel = PlayerPrefs.GetInt(FIRE_BONUS_LEVEL_KEY, 0);
+                coinsEarned += fireBonusLevel * fireCoinBonusPerLevel;
+            }
 
+            if (Wallet.Instance != null)
+                Wallet.Instance.AddCoins(coinsEarned);
+
+            if (feedbackText != null)
+                feedbackText.text = $"Correct! +{coinsEarned} Coins";
+
+            // Reset selection
             selectedElement = ElementType.None;
             selectedEffect = EffectType.None;
 
@@ -129,7 +168,8 @@ public class SpellWeaverPrototype : MonoBehaviour
         else
         {
             streak = 0;
-            feedbackText.text = "Wrong. Streak reset.";
+            if (feedbackText != null)
+                feedbackText.text = "Wrong. Streak reset.";
         }
 
         UpdateScoreUI();
@@ -151,8 +191,11 @@ public class SpellWeaverPrototype : MonoBehaviour
         requiredElement = newElement;
         requiredEffect = newEffect;
 
-        requestText.text =
-            $"Request: {requiredElement.ToString().ToUpper()} + {requiredEffect.ToString().ToUpper()}";
+        if (requestText != null)
+        {
+            requestText.text =
+                $"Request: {requiredElement.ToString().ToUpper()} + {requiredEffect.ToString().ToUpper()}";
+        }
     }
 
     private void UpdateFeedback()
@@ -160,27 +203,34 @@ public class SpellWeaverPrototype : MonoBehaviour
         string elementStr = selectedElement == ElementType.None ? "???" : selectedElement.ToString().ToUpper();
         string effectStr = selectedEffect == EffectType.None ? "???" : selectedEffect.ToString().ToUpper();
 
-        feedbackText.text = $"Selected: {elementStr} + {effectStr}";
+        if (feedbackText != null)
+            feedbackText.text = $"Selected: {elementStr} + {effectStr}";
+
         UpdateCastButton();
     }
 
     private void UpdateCastButton()
     {
-        if (castButton != null)
-        {
-            castButton.interactable =
-                runActive &&
-                selectedElement != ElementType.None;
-        }
+        if (castButton == null) return;
+
+        // FIXED: requires BOTH element and effect
+        castButton.interactable =
+            runActive &&
+            selectedElement != ElementType.None &&
+            selectedEffect != EffectType.None;
     }
 
     private void UpdateScoreUI()
     {
+        if (scoreText == null || Wallet.Instance == null) return;
+
         scoreText.text = $"Coins: {Wallet.Instance.Coins}  |  Streak: {streak}";
     }
 
     private void UpdateTimerUI()
     {
+        if (timerText == null) return;
+
         if (!useTimedMode)
         {
             timerText.text = "Mode: Endless";
@@ -191,11 +241,9 @@ public class SpellWeaverPrototype : MonoBehaviour
         timerText.text = $"Time: {seconds}";
     }
 
-    // Restart button can stay visible always
     public void RestartButton()
     {
         if (runActive) return;
-
         StartRun();
     }
 }
