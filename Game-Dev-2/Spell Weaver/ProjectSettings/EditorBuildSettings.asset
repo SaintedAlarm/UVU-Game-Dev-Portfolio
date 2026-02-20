@@ -6,6 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/Main Menu.unity
     guid: ec8331e993189874b99a75b4343d1180
   - enabled: 1
@@ -20,6 +21,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Shop.unity
     guid: 074bbb81d4b201c42b56f8f325968624
+=======
+    path: Assets/Scenes/Spell Weaving.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Mode Select.unity
+    guid: b48822132ffeb484098d809ed4faae4d
+  - enabled: 1
+    path: Assets/Scenes/Shop.unity
+    guid: 074bbb81d4b201c42b56f8f325968624
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: ec8331e993189874b99a75b4343d1180
+>>>>>>> parent of e3960508 (Changes to the game and made a full lamp rig)
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 9d92adda3e057414fbbba4dcf45b5cdf, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
